@@ -1,7 +1,8 @@
 import React from "react";
 
 const Book = props => {
-  const { title, authors, imageLinks = "" } = props.info;
+  const { title, authors, imageLinks = "", shelf } = props.info;
+  //console.log(props);
   return (
     <li>
       <div className="book">
@@ -16,24 +17,30 @@ const Book = props => {
           ></div>
           <div className="book-shelf-changer">
             <select
-              onChange={e => props.handleChange(props.info, e.target.value)}
+              onChange={e => {
+                props.handleChange(props.info, e.target.value);
+              }}
             >
-              <option value="move" disabled>
-                Move to...
+              <option value="move">Move to...</option>
+              <option value="none">
+                {shelf === "none" ? "> None" : "none"}
               </option>
-              <option value="none">None</option>
-              <option value="currentlyReading">Currently Reading</option>
-              <option value="wantToRead">Want to Read</option>
-              <option value="read">Read</option>
+              <option value="currentlyReading">
+                {shelf === "currentlyReading"
+                  ? "> Currently Reading"
+                  : "Currently Reading"}
+              </option>
+              <option value="wantToRead">
+                {shelf === "wantToRead" ? "> Want to read" : "Want to read"}
+              </option>
+              <option value="read">
+                {shelf === "read" ? "> Read" : "Read"}
+              </option>
             </select>
           </div>
         </div>
-        <div className="book-title">
-          {props.info ? `${title}` : "To Kill a Mockingbird"}
-        </div>
-        <div className="book-authors">
-          {props.info ? `${authors}` : "To Kill a Mockingbird"}
-        </div>
+        <div className="book-title">{props.info ? `${title}` : ""}</div>
+        <div className="book-authors">{props.info ? `${authors}` : ""}</div>
       </div>
     </li>
   );
