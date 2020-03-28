@@ -2,6 +2,7 @@ import React from "react";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
 import BookDisplay from "./components/bookDisplay";
+import SearchBooks from "./components/SearchBooks";
 
 class BooksApp extends React.Component {
   state = {
@@ -12,7 +13,7 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: true
+    showSearchPage: false
   };
   // uppon initialization we store in state an array of the required books in our app
   updateState = () => {
@@ -35,22 +36,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <button
-                className="close-search"
-                onClick={() => this.setState({ showSearchPage: false })}
-              >
-                Close
-              </button>
-              <div className="search-books-input-wrapper">
-                <input type="text" placeholder="Search by title or author" />
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid"></ol>
-            </div>
-          </div>
+          <SearchBooks />
         ) : (
           <div className="list-books">
             <div className="list-books-title">
@@ -79,7 +65,11 @@ class BooksApp extends React.Component {
               </div>
             </div>
             <div className="open-search">
-              <button onClick={() => this.setState({ showSearchPage: true })}>
+              <button
+                onClick={() =>
+                  this.setState({ showSearchPage: !this.state.showSearchPage })
+                }
+              >
                 Add a book
               </button>
             </div>

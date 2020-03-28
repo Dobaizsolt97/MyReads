@@ -2,7 +2,12 @@ import React from "react";
 import Book from "./Book";
 
 const BookDisplay = props => {
-  const nowReading = props.books.filter(book => book.shelf === props.shelf);
+  let nowReading = [];
+  if (props.shelf === "any") {
+    nowReading = props.books;
+  } else {
+    nowReading = props.books.filter(book => book.shelf === props.shelf);
+  }
 
   return (
     <div className="bookshelf">

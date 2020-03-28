@@ -1,6 +1,7 @@
 import React from "react";
 
 const Book = props => {
+  const { title, authors, imageLinks = "" } = props.info;
   return (
     <li>
       <div className="book">
@@ -10,9 +11,7 @@ const Book = props => {
             style={{
               width: 128,
               height: 193,
-              backgroundImage: `url(${
-                props.info ? props.info.imageLinks.thumbnail : ""
-              })`
+              backgroundImage: `url(${props.info ? imageLinks.thumbnail : ""})`
             }}
           ></div>
           <div className="book-shelf-changer">
@@ -30,10 +29,10 @@ const Book = props => {
           </div>
         </div>
         <div className="book-title">
-          {props.info ? `${props.info.title}` : "To Kill a Mockingbird"}
+          {props.info ? `${title}` : "To Kill a Mockingbird"}
         </div>
         <div className="book-authors">
-          {props.info ? `${props.info.authors[0]}` : "To Kill a Mockingbird"}
+          {props.info ? `${authors}` : "To Kill a Mockingbird"}
         </div>
       </div>
     </li>
