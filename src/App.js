@@ -50,6 +50,7 @@ class BooksApp extends React.Component {
                 <div>
                   {BookShelves.map(shelf => (
                     <BookDisplay
+                      key={shelf[1]}
                       books={this.state.books}
                       handleChange={this.handleChange}
                       shelfName={shelf[0]}

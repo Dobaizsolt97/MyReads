@@ -8,6 +8,9 @@ class SearchBooks extends Component {
 
   updateUi = text => {
     this.setState(() => ({ books: [] }));
+    if (text === "") {
+      return;
+    }
 
     BooksAPI.search(text).then(result => {
       if (!result || result.error) {
