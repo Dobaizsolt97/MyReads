@@ -26,12 +26,16 @@ class BooksApp extends React.Component {
   };
 
   render() {
-    //console.log(this.state.books);
+    const BookShelves = [
+      ["Want to read", "wantToRead"],
+      ["Currently Reading", "currentlyReading"],
+      ["Read", "read"]
+    ];
     return (
       <div className="app">
         <Route
           exact
-          path="/add"
+          path="/search"
           render={() => <SearchBooks return={this.updateState} />}
         />
         <Route
@@ -44,28 +48,18 @@ class BooksApp extends React.Component {
               </div>
               <div className="list-books-content">
                 <div>
-                  <BookDisplay
-                    shelfName="Currently Reading"
-                    books={this.state.books}
-                    shelf={"currentlyReading"}
-                    handleChange={this.handleChange}
-                  />
-                  <BookDisplay
-                    shelfName="Want to read"
-                    books={this.state.books}
-                    shelf={"wantToRead"}
-                    handleChange={this.handleChange}
-                  />
-                  <BookDisplay
-                    shelfName="Read"
-                    books={this.state.books}
-                    shelf={"read"}
-                    handleChange={this.handleChange}
-                  />
+                  {BookShelves.map(shelf => (
+                    <BookDisplay
+                      books={this.state.books}
+                      handleChange={this.handleChange}
+                      shelfName={shelf[0]}
+                      shelf={shelf[1]}
+                    />
+                  ))}
                 </div>
               </div>
               <div className="open-search">
-                <Link to="/add">
+                <Link to="/search">
                   <button>Add a book</button>
                 </Link>
               </div>

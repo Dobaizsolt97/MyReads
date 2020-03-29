@@ -2,9 +2,9 @@ import React from "react";
 
 const Book = props => {
   const { title, authors, imageLinks = "", shelf } = props.info;
-  //console.log(props);
+
   return (
-    <li>
+    <li key={props.info.id}>
       <div className="book">
         <div className="book-top">
           <div
@@ -23,7 +23,7 @@ const Book = props => {
             >
               <option value="move">Move to...</option>
               <option value="none">
-                {shelf === "none" ? "> None" : "none"}
+                {shelf === "none" ? "> None" : "None"}
               </option>
               <option value="currentlyReading">
                 {shelf === "currentlyReading"

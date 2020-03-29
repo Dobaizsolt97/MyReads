@@ -8,14 +8,12 @@ class SearchBooks extends Component {
 
   updateUi = text => {
     this.setState(() => ({ books: [] }));
+
     BooksAPI.search(text).then(result => {
-      if (!result) {
-        return;
-      } else if (result.error) {
+      if (!result || result.error) {
         return;
       } else {
         let ids = result.map(books => books.id);
-        //console.log(ids);
         let books = [];
         for (const id of ids) {
           BooksAPI.get(id).then(result => {
@@ -33,6 +31,7 @@ class SearchBooks extends Component {
   };
   onInput = text => {
     this.setState(() => ({ query: text, books: [] }));
+
     this.updateUi(text);
   };
   handleChange = (book, shelf, text = this.state.query) => {
@@ -67,11 +66,13 @@ class SearchBooks extends Component {
         <div className="search-books-results">
           <ol className="books-grid"></ol>
         </div>
-        <BookDisplay
-          handleChange={this.handleChange}
-          shelf="any"
-          books={this.state.books}
-        />
+        {this.state.query === "" ? null : (
+          <BookDisplay
+            handleChange={this.handleChange}
+            shelf="any"
+            books={this.state.books}
+          />
+        )}
       </div>
     );
   }
